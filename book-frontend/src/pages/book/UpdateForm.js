@@ -26,8 +26,8 @@ const UpdateForm = (props) => {
 
   const submitBook = (e) => {
     e.preventDefault(); // submit이 action을 안타고 자기 할 일을 하게함
-    fetch('http://localhost:8080/book', {
-      method: 'POST',
+    fetch('http://localhost:8080/book/' + id, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
@@ -35,7 +35,7 @@ const UpdateForm = (props) => {
     })
       .then((res) => {
         console.log(1, res);
-        if (res.status === 201) {
+        if (res.status === 200) {
           return res.json();
         } else {
           return null;
@@ -45,9 +45,9 @@ const UpdateForm = (props) => {
         // catch는 해당 분기에서 오류 발생 시 발현!
         console.log(2, res);
         if (res !== null) {
-          props.history.push('/');
+          props.history.push('/book/' + id);
         } else {
-          alert('책 등록 실패!');
+          alert('책 수정 실패!');
         }
       });
   };
